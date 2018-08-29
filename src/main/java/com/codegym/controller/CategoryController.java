@@ -55,4 +55,13 @@ public class CategoryController {
             return modelAndView;
         }
     }
+
+    @PostMapping("/edit-category")
+    public ModelAndView updateCustomer(@ModelAttribute("category") Category category) {
+        categoryService.save(category);
+        ModelAndView modelAndView = new ModelAndView("/category/edit");
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("message", "Category updated successfully");
+        return modelAndView;
+    }
 }
