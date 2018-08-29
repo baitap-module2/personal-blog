@@ -64,4 +64,24 @@ public class CategoryController {
         modelAndView.addObject("message", "Category updated successfully");
         return modelAndView;
     }
+
+    //    xóa
+    @GetMapping("/delete-category/{id}")
+    public ModelAndView showDeleteForm(@PathVariable Long id) {
+        Category category = categoryService.findById(id);
+        if (category != null) {
+            ModelAndView modelAndView = new ModelAndView("/category/delete");
+            modelAndView.addObject("customer", category);
+            return modelAndView;
+        } else {
+            ModelAndView modelAndView = new ModelAndView("/error.404");
+            return modelAndView;
+        }
+    }
+
+    @PostMapping("/delete-category")
+    public String deleteCustomer(@ModelAttribute("category") Category category) {
+        categoryService.remove(category.getId());
+        return "redirect:customers";
+    }
 }
