@@ -1,6 +1,8 @@
 package com.codegym;
 
 
+import com.codegym.service.BlogService;
+import com.codegym.service.BlogServiceImpl;
 import com.codegym.service.CategoryService;
 import com.codegym.service.CategoryServiceImpl;
 import org.springframework.beans.BeansException;
@@ -47,6 +49,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public CategoryService categoryService() {
         return new CategoryServiceImpl();
+    }
+
+    @Bean
+    public BlogService blogService() {
+        return new BlogServiceImpl();
     }
 
     //Thymeleaf Configuration
