@@ -1,6 +1,7 @@
 package com.codegym.controller;
 
 import com.codegym.model.Category;
+import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private BlogService blogService;
 
     //    hiển thị danh sách
     @GetMapping("/categories")
