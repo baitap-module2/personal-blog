@@ -71,7 +71,7 @@ public class CategoryController {
         Category category = categoryService.findById(id);
         if (category != null) {
             ModelAndView modelAndView = new ModelAndView("/category/delete");
-            modelAndView.addObject("customer", category);
+            modelAndView.addObject("category", category);
             return modelAndView;
         } else {
             ModelAndView modelAndView = new ModelAndView("/error.404");
@@ -82,6 +82,6 @@ public class CategoryController {
     @PostMapping("/delete-category")
     public String deleteCustomer(@ModelAttribute("category") Category category) {
         categoryService.remove(category.getId());
-        return "redirect:customers";
+        return "redirect:/categories";
     }
 }
