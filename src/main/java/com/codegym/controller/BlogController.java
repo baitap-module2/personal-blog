@@ -36,7 +36,7 @@ public class BlogController {
     }
 
     //    thêm
-    @GetMapping("/create-blog/{id}")
+    @GetMapping("/create-blog")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/blog/create");
         modelAndView.addObject("blog", new Blog());
