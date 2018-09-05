@@ -1,8 +1,11 @@
 package com.codegym.service;
 
 import com.codegym.model.Blog;
+import com.codegym.model.Category;
 import com.codegym.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Blob;
 
 public class BlogServiceImpl implements BlogService {
     @Autowired
