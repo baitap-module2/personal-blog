@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.Blob;
+
 @Controller
 public class CategoryController {
     @Autowired
@@ -61,7 +63,7 @@ public class CategoryController {
     }
 
     @PostMapping("/edit-category")
-    public ModelAndView updateCustomer(@ModelAttribute("category") Category category) {
+    public ModelAndView updateCategory(@ModelAttribute("category") Category category) {
         categoryService.save(category);
         ModelAndView modelAndView = new ModelAndView("/category/edit");
         modelAndView.addObject("category", category);
@@ -84,7 +86,7 @@ public class CategoryController {
     }
 
     @PostMapping("/delete-category")
-    public String deleteCustomer(@ModelAttribute("category") Category category) {
+    public String deleteCategory(@ModelAttribute("category") Category category) {
         categoryService.remove(category.getId());
         return "redirect:/categories";
     }
