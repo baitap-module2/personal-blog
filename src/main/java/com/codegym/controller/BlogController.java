@@ -5,6 +5,8 @@ import com.codegym.model.Category;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,13 +29,13 @@ public class BlogController {
     }
 
     //    hiển thị danh sách
-    @GetMapping("/blogs")
-    public ModelAndView listBlog() {
-        Iterable<Blog> blogs = blogService.findAll();
-        ModelAndView modelAndView = new ModelAndView("/blog/list");
-        modelAndView.addObject("blogs", blogs);
-        return modelAndView;
-    }
+//    @GetMapping("/blogs")
+//    public ModelAndView listBlog() {
+//        Iterable<Blog> blogs = blogService.findAll();
+//        ModelAndView modelAndView = new ModelAndView("/blog/list");
+//        modelAndView.addObject("blogs", blogs);
+//        return modelAndView;
+//    }
 
     //    thêm
     @GetMapping("/create-blog")
@@ -93,5 +95,14 @@ public class BlogController {
     public String deleteBlog(@ModelAttribute("blog") Blog blog) {
         blogService.remove(blog.getId());
         return "redirect:/blogs";
+    }
+
+    //    phân trang
+    @GetMapping("/blogs")
+    public ModelAndView listBlogs(Pageable pageable) {
+        Page<Blog> blogs = blogService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/blog/list");
+        modelAndView.addObject("blogs", blogs);
+        return modelAndView;
     }
 }
