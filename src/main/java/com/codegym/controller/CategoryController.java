@@ -22,7 +22,7 @@ public class CategoryController {
     @Autowired
     private BlogService blogService;
 
-    //    hiển thị danh sách
+    //    show list
     @GetMapping("/categories")
     public ModelAndView listCategories() {
         Iterable<Category> categories = categoryService.findAll();
@@ -31,7 +31,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    //    thêm
+    //    create
     @GetMapping("/create-category")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/category/create");
@@ -48,7 +48,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    //    sửa
+    //    update
     @GetMapping("/edit-category/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
         Category category = categoryService.findById(id);
@@ -71,7 +71,7 @@ public class CategoryController {
         return modelAndView;
     }
 
-    //    xóa
+    //    delete
     @GetMapping("/delete-category/{id}")
     public ModelAndView showDeleteForm(@PathVariable Long id) {
         Category category = categoryService.findById(id);

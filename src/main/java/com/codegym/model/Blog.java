@@ -9,7 +9,7 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String author;
+    private String writer;
 
     private String title;
 
@@ -27,12 +27,12 @@ public class Blog {
         this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getWriter() {
+        return writer;
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        this.writer = writer;
     }
 
     public String getTitle() {

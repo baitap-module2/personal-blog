@@ -22,22 +22,21 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
-    //    gắn danh sách các category vào tất cả các model của view
     @ModelAttribute("categories")
     Iterable<Category> categories() {
         return categoryService.findAll();
     }
 
-    //    hiển thị danh sách
-//    @GetMapping("/blogs")
-//    public ModelAndView listBlog() {
-//        Iterable<Blog> blogs = blogService.findAll();
-//        ModelAndView modelAndView = new ModelAndView("/blog/list");
-//        modelAndView.addObject("blogs", blogs);
-//        return modelAndView;
-//    }
+    //    show list
+    @GetMapping("/blogs")
+    public ModelAndView listBlogs(Pageable pageable) {
+        Page<Blog> blogs = blogService.findAll(pageable);
+        ModelAndView modelAndView = new ModelAndView("/blog/list");
+        modelAndView.addObject("blogs", blogs);
+        return modelAndView;
+    }
 
-    //    thêm
+    //    create
     @GetMapping("/create-blog")
     public ModelAndView showCreateForm() {
         ModelAndView modelAndView = new ModelAndView("/blog/create");
@@ -54,7 +53,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    //    sửa
+    //    update
     @GetMapping("/edit-blog/{id}")
     public ModelAndView showEditForm(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
@@ -77,7 +76,7 @@ public class BlogController {
         return modelAndView;
     }
 
-    //    xóa
+    //    delete
     @GetMapping("/delete-blog/{id}")
     public ModelAndView showDeleteForm(@PathVariable Long id) {
         Blog blog = blogService.findById(id);
@@ -95,14 +94,5 @@ public class BlogController {
     public String deleteBlog(@ModelAttribute("blog") Blog blog) {
         blogService.remove(blog.getId());
         return "redirect:/blogs";
-    }
-
-    //    phân trang
-    @GetMapping("/blogs")
-    public ModelAndView listBlogs(Pageable pageable) {
-        Page<Blog> blogs = blogService.findAll(pageable);
-        ModelAndView modelAndView = new ModelAndView("/blog/list");
-        modelAndView.addObject("blogs", blogs);
-        return modelAndView;
     }
 }
