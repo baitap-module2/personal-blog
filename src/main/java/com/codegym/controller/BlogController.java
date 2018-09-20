@@ -27,6 +27,11 @@ public class BlogController {
         return categoryService.findAll();
     }
 
+    @GetMapping("/")
+    public String showHomePage() {
+        return "home";
+    }
+
     //    show list
     @GetMapping("/blogs")
     public ModelAndView listBlogs(Pageable pageable) {
