@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @Controller
 public class BlogController {
@@ -34,11 +33,16 @@ public class BlogController {
 
     //    show list
     @GetMapping("/blogs")
-    public ModelAndView listBlogs(Pageable pageable) {
-        Page<Blog> blogs = blogService.findAll(pageable);
-        ModelAndView modelAndView = new ModelAndView("/blog/list");
-        modelAndView.addObject("blogs", blogs);
-        return modelAndView;
+    public ModelAndView listBlogs(@RequestParam("s") Optional<String> s, Pageable pageable) {
+        Page<Blog> blogs;
+        if (s.isPresent()) {
+            blogs = blogService.findAllByTitleContainingOrWriterContaining(s.get(), s.get(), pageable);
+        } else {
+            blogs = blogService.findAll(pageable);
+        }
+        ModelAndView modelAndView1 = new ModelAndView("/blog/list");
+        modelAndView1.addObject("blogs", blogs);
+        return modelAndView1;
     }
 
     //    create
