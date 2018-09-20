@@ -9,15 +9,17 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String writer;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "writer_id")
+    private Writer writer;
 
     private String title;
 
     private String content;
-
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
 
     public Long getId() {
         return id;
@@ -27,8 +29,12 @@ public class Blog {
         this.id = id;
     }
 
-    public String getWriter() {
+    public Writer getWriter() {
         return writer;
+    }
+
+    public void setWriter(Writer writer) {
+        this.writer = writer;
     }
 
     public void setAuthor(String author) {
