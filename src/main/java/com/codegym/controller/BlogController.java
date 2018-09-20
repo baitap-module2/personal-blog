@@ -2,8 +2,10 @@ package com.codegym.controller;
 
 import com.codegym.model.Blog;
 import com.codegym.model.Category;
+import com.codegym.model.Writer;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
+import com.codegym.service.WriterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,9 +23,17 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private WriterService writerService;
+
     @ModelAttribute("categories")
-    Iterable<Category> categories() {
+    public Iterable<Category> categories() {
         return categoryService.findAll();
+    }
+
+    @ModelAttribute
+    public Iterable<Writer> writers() {
+        return writerService.findAll();
     }
 
     @GetMapping("/")
