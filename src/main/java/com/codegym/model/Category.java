@@ -18,6 +18,11 @@ public class Category {
     public Category() {
     }
 
+    public Category(String name, List<Blog> blogs) {
+        this.name = name;
+        this.blogs = blogs;
+    }
+
     public Long getId() {
         return id;
     }
