@@ -1,7 +1,8 @@
-package com.codegym.service;
+package com.codegym.service.impl;
 
 import com.codegym.model.Writer;
 import com.codegym.repository.WriterRepository;
+import com.codegym.service.WriterService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class WriterServiceImpl implements WriterService {
