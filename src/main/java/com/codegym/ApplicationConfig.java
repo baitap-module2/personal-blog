@@ -2,10 +2,13 @@ package com.codegym;
 
 
 import com.codegym.formatter.CategoryFormatter;
+import com.codegym.formatter.WriterFormatter;
 import com.codegym.service.BlogService;
-import com.codegym.service.BlogServiceImpl;
+import com.codegym.service.WriterService;
+import com.codegym.service.impl.BlogServiceImpl;
 import com.codegym.service.CategoryService;
-import com.codegym.service.CategoryServiceImpl;
+import com.codegym.service.impl.CategoryServiceImpl;
+import com.codegym.service.impl.WriterServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -58,6 +61,11 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Bean
     public BlogService blogService() {
         return new BlogServiceImpl();
+    }
+
+    @Bean
+    public WriterService writerService() {
+        return new WriterServiceImpl();
     }
 
     //Thymeleaf Configuration
@@ -129,10 +137,9 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         return properties;
     }
 
-
-    //đăng ký formatter
     @Override
     public void addFormatters(FormatterRegistry registry) {
         registry.addFormatter(new CategoryFormatter(applicationContext.getBean(CategoryService.class)));
+        registry.addFormatter(new WriterFormatter(applicationContext.getBean(WriterService.class)));
     }
 }
