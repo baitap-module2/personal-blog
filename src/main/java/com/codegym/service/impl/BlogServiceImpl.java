@@ -38,4 +38,11 @@ public class BlogServiceImpl implements BlogService {
     public Page<Blog> findAll(Pageable pageable) {
         return blogRepository.findAll(pageable);
     }
+
+    @Override
+    public Page<Blog> findAllByTitleContainingOrWriterContaining(String title, String writer, Pageable pageable) {
+        return blogRepository.findAllByTitleContainingOrWriterContaining(title, writer, pageable);
+    }
+
+
 }
